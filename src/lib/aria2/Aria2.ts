@@ -1,3 +1,8 @@
-import { open } from "maria2";
+import { createClient } from "naria2";
 
-export const conn = await open(new WebSocket("ws://localhost:6800/jsonrpc"));
+export const aria2Client = await createClient(
+  new WebSocket("ws://localhost:6800/jsonrpc"),
+  {
+    secret: "123456",
+  }
+);

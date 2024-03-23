@@ -1,3 +1,4 @@
+import { DownloadList } from "@/components/downloadsList/downloadList";
 import { DownloadStatus } from "@/components/downloadsList/downloadStatus";
 import { CardRootProps } from "@/components/primitives/card.props";
 import { localDB } from "@/lib/db/localDB";
@@ -29,6 +30,7 @@ function Download() {
   return (
     <div>
       <DownloadStatus onUpdateStatus={updateStorage} status={data} />
+      <DownloadList />
     </div>
   );
 }
