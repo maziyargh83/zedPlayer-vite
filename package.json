@@ -23,6 +23,7 @@
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.20",
     "libaria2": "^1.0.95",
+    "localforage": "^1.10.0",
     "lucide-react": "^0.363.0",
     "maria2": "^0.3.3",
     "react": "^18.2.0",

@@ -1,5 +1,6 @@
+import { FunctionComponent, ReactNode } from "react";
+import { IconsManifest } from "react-icons";
 export async function loadIconFiles(selectedTab: string) {
-  return await import("react-icons/" + selectedTab);
   switch (selectedTab) {
     case "ci":
       return await import("react-icons/ci");
@@ -65,3 +66,20 @@ export async function loadIconFiles(selectedTab: string) {
       return await import("react-icons/lia");
   }
 }
+export type iconFileType = ReturnType<Awaited<typeof loadIconFiles>>;
+
+const ids = IconsManifest.map((icon) => icon.id);
+type iconLoader = Record<string, FunctionComponent>;
+export const LoadIconBuyName = async (
+  name: string,
+  long = 2
+): Promise<JSX.Element> => {
+  const prefix = name.slice(0, long)?.toLocaleLowerCase();
+  const matches = ids.filter((id) => id.startsWith(prefix));
+  if (matches.length > 1) {
+    return LoadIconBuyName(name, 3);
+  }
+  const icons = (await loadIconFiles(matches[0])) as unknown as iconLoader;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (icons as unknown as any)?.[name]?.() as JSX.Element;
+};

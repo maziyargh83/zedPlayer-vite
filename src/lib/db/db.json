@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "folders": [],
+  "statuses": [
+    {
+      "title": "Downloads",
+      "icon": "FiDownloadCloud",
+      "theme": "bg-teal-100",
+      "className": "flex-1"
+    },
+    {
+      "title": "Finished",
+      "icon": "FiFile",
+      "theme": "bg-blue-100",
+      "className": "flex-1"
+    },
+    {
+      "title": "Pending",
+      "icon": "FiClock",
+      "theme": "bg-yellow-100",
+      "className": "flex-1"
+    }
+  ]
+}

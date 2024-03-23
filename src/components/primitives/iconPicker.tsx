@@ -1,4 +1,4 @@
-import { loadIconFiles } from "@/lib/loadIcons";
+import { iconFileType, loadIconFiles } from "@/lib/loadIcons";
 import {
   cloneElement,
   PropsWithChildren,
@@ -16,7 +16,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-type iconFileType = ReturnType<Awaited<typeof loadIconFiles>>;
 
 export const IconPicker = ({
   children,

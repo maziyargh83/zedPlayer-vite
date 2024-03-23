@@ -13,7 +13,8 @@ import { FaCircleQuestion } from "react-icons/fa6";
 import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
-import { createContext } from "@/components/context/context";
+import { useControllableState } from "@/hooks/useControllableState";
+import { createControlledContext } from "@/components/context/createControlledContext";
 interface CardContextType {
   isEdit: boolean;
   title: string;
@@ -21,13 +22,17 @@ interface CardContextType {
   icon: React.ReactNode;
   editable?: boolean;
 }
-const [CardContext, useCardContext] = createContext<CardContextType>({
+type onUpdate = { onUpdate?: (d: Partial<CardContextType>) => void };
+const cardDefaultContext: CardContextType & onUpdate = {
   isEdit: false,
   title: "",
   theme: "bg-gray-100",
   icon: <Fragment />,
   editable: true,
-});
+};
+const [CardContext, useCardContext] = createControlledContext<
+  CardContextType & onUpdate
+>(cardDefaultContext);
 const CardRoot = ({
   className,
   children,
@@ -35,14 +40,27 @@ const CardRoot = ({
   title,
   icon,
   editable = true,
+  onChange,
 }: PropsWithChildren<CardRootProps>) => {
+  const [props, setProps] = useControllableState<CardContextType>({
+    prop: {
+      title,
+      theme,
+      editable,
+      icon: icon as JSX.Element,
+      isEdit: false,
+    },
+    onChange: (data) => {
+      onChange?.(data);
+    },
+  });
   return (
     <CardContext
-      editable={editable}
-      isEdit={false}
-      theme={theme}
-      title={title}
-      icon={icon}
+      {...props!}
+      onUpdate={(d) => {
+        const data: CardContextType = { ...props, ...d };
+        setProps(data);
+      }}
     >
       <div className={cn(" w-64 rounded-xl p-[3px]", className, theme)}>
         {children}
@@ -79,8 +97,7 @@ const CardFooter = () => {
 };
 
 const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
-  const [{ theme, icon, editable }] = useCardContext();
-  const [data, setData] = useCardContext();
+  const { theme, icon, editable, isEdit, onUpdate } = useCardContext();
   const [isHover, setIsHover] = useState(false);
   const renderChildren = useMemo(() => {
     if (typeof children === "function") return children({ isHover });
@@ -110,7 +127,7 @@ const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
       >
         <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
           {editable ? (
-            <IconPicker onSelect={(ic) => setData({ icon: ic })}>
+            <IconPicker onSelect={(ic) => onUpdate?.({ icon: ic })}>
               <Button variant={"ghost"} className="p-2 h-4">
                 {icon}
               </Button>
@@ -129,7 +146,7 @@ const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
           "h-full flex items-center transition-all duration-300",
           theme,
           {
-            "flex-1": !data.isEdit,
+            "flex-1": !isEdit,
           }
         )}
       >
@@ -144,10 +161,10 @@ const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
 };
 
 const CardTitle = () => {
-  const [{ isEdit, title, theme, editable }, update] = useCardContext();
+  const { isEdit, title, theme, editable, onUpdate } = useCardContext();
   const [newTitle, setNewTitle] = useState(title);
   const setIsEdit = (edit: boolean) => {
-    update({ isEdit: edit });
+    onUpdate?.({ isEdit: edit });
   };
   const showEdit = () => {
     setIsEdit(true);
@@ -155,7 +172,7 @@ const CardTitle = () => {
   const onSubmit = () => {
     setIsEdit(false);
 
-    update({
+    onUpdate?.({
       title: newTitle,
     });
   };

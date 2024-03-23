@@ -13,7 +13,7 @@ export const Header = () => {
         <Search />
       </div>
       <div className="flex-1 justify-end flex items-center">
-        <Link to={"/"}>
+        <Link to={"/download"}>
           <FiDownloadCloud />
         </Link>
         <Profile />
