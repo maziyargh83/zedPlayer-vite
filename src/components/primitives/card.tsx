@@ -19,7 +19,8 @@ interface CardContextType {
   isEdit: boolean;
   title: string;
   theme: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
+  iconName: string;
   editable?: boolean;
 }
 type onUpdate = { onUpdate?: (d: Partial<CardContextType>) => void };
@@ -27,8 +28,8 @@ const cardDefaultContext: CardContextType & onUpdate = {
   isEdit: false,
   title: "",
   theme: "bg-gray-100",
-  icon: <Fragment />,
   editable: true,
+  iconName: "",
 };
 const [CardContext, useCardContext] = createControlledContext<
   CardContextType & onUpdate
@@ -41,17 +42,25 @@ const CardRoot = ({
   icon,
   editable = true,
   onChange,
+  iconName,
+  id,
 }: PropsWithChildren<CardRootProps>) => {
   const [props, setProps] = useControllableState<CardContextType>({
     prop: {
       title,
       theme,
       editable,
-      icon: icon as JSX.Element,
+      icon,
+      iconName,
       isEdit: false,
     },
     onChange: (data) => {
-      onChange?.(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { isEdit, ...rest } = data;
+      console.log("====================================");
+      console.log({ rest });
+      console.log("====================================");
+      onChange?.({ ...rest, id });
     },
   });
   return (
@@ -127,7 +136,9 @@ const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
       >
         <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
           {editable ? (
-            <IconPicker onSelect={(ic) => onUpdate?.({ icon: ic })}>
+            <IconPicker
+              onSelect={({ iconName, icon }) => onUpdate?.({ icon, iconName })}
+            >
               <Button variant={"ghost"} className="p-2 h-4">
                 {icon}
               </Button>
@@ -170,11 +181,11 @@ const CardTitle = () => {
     setIsEdit(true);
   };
   const onSubmit = () => {
-    setIsEdit(false);
-
     onUpdate?.({
       title: newTitle,
+      isEdit: false,
     });
+    setNewTitle(title);
   };
   const close = () => {
     setIsEdit(false);

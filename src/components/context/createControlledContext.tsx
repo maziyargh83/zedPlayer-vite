@@ -11,9 +11,7 @@ function createControlledContext<ContextValueType extends object>(
       () => context,
       Object.values(context)
     ) as ContextValueType;
-    console.log("====================================");
-    console.log({ value });
-    console.log("====================================");
+
     return (
       <Context.Provider value={value as ContextValueType}>
         {children}

@@ -12,38 +12,45 @@ export const DownloadStatus = ({
   onUpdateStatus: (status: CardRootProps[]) => void;
 }) => {
   const [statuses, setStatuses] = useState([...status]);
-  const updateStatus = () => {
-    setStatuses((s) => {
-      s[0].title = "messi komichi";
-      return [...s];
+  const updateStatuses = (_status: CardRootProps[]) => {
+    setStatuses(_status);
+    onUpdateStatus(_status);
+  };
+  const updateSingleStatus = (item: Partial<CardRootProps>) => {
+    const newStatuses = statuses.map((status) => {
+      if (status.id === item.id) {
+        return {
+          ...status,
+          ...item,
+        };
+      }
+      return status;
     });
+    updateStatuses(newStatuses);
   };
   return (
     <Fragment>
-      <h1 onClick={updateStatus}>hi</h1>
       <Reorder.Group
         axis="x"
-        onReorder={(_status) => {
-          setStatuses(_status);
-          onUpdateStatus(_status);
-        }}
+        onReorder={updateStatuses}
         values={statuses}
         className="flex justify-between space-x-3"
       >
         <AnimatePresence initial={false}>
           {statuses.map((status) => (
-            <Drag.Root key={status.title}>
+            <Drag.Root key={status.id}>
               {({ controls }) => (
                 <Reorder.Item
                   value={status}
                   className="flex-1 flex"
-                  id={status.title}
+                  id={status.id}
                   dragListener={false}
                   dragControls={controls}
                 >
                   <Card.Root
                     {...status}
-                    icon={<IconDisplay icon={status.icon} />}
+                    icon={<IconDisplay icon={status.iconName} />}
+                    onChange={updateSingleStatus}
                   >
                     <Card.Header>
                       {({ isHover }) => (

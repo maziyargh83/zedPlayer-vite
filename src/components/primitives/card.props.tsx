@@ -3,16 +3,18 @@ import { PropsWithClassName, PropsWithFunctionalProps } from "@/types/global";
 export interface CardProps {
   className?: string;
   title: string;
-  icon: React.ReactNode | string;
+  icon?: React.ReactNode;
+  iconName: string;
   theme?: string;
   editable?: boolean;
+  id: string;
 }
 export type CardRootProps = Pick<
   CardProps,
-  "theme" | "title" | "icon" | "editable"
+  "theme" | "title" | "icon" | "iconName" | "editable" | "id"
 > &
   PropsWithClassName & {
-    onChange?: (data: CardProps) => void;
+    onChange?: (data: Partial<CardProps>) => void;
   };
 export type CardHeaderTitleProps = Omit<CardProps, "icon"> &
   Pick<CardProps, "title"> & {

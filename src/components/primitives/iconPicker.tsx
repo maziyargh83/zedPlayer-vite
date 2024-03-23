@@ -16,12 +16,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 export const IconPicker = ({
   children,
   onSelect,
 }: PropsWithChildren<{
-  onSelect?: (icon: React.ReactNode) => void;
+  onSelect?: (item: { icon: React.ReactNode; iconName: string }) => void;
 }>) => {
   const [selectedTab, setSelectedTab] = useState(IconsManifest[0].id);
   const [icons, setIcons] = useState<Awaited<iconFileType>>();
@@ -87,14 +88,20 @@ export const IconPicker = ({
                   {}
                 );
                 return (
-                  <Button
-                    key={icon}
-                    onClick={() => onSelect?.(ic)}
-                    variant={"ghost"}
-                    title={icon}
-                  >
-                    {ic}
-                  </Button>
+                  <PopoverClose key={icon}>
+                    <Button
+                      onClick={() =>
+                        onSelect?.({
+                          icon: ic,
+                          iconName: icon,
+                        })
+                      }
+                      variant={"ghost"}
+                      title={icon}
+                    >
+                      {ic}
+                    </Button>
+                  </PopoverClose>
                 );
               })}
           </div>

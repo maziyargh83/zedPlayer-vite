@@ -6,14 +6,25 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/download/")({
   component: Download,
   loader: async () => {
-    return (await localDB.getItem("statuses")) as CardRootProps[];
+    return ((await localDB.getItem("statuses")) as CardRootProps[]) || [];
   },
 });
 
 function Download() {
   const data = Route.useLoaderData();
   const updateStorage = (status: CardRootProps[]) => {
-    localDB.setItem("statuses", status);
+    const res = status.map((item) => {
+      return {
+        ...item,
+        icon: item.iconName,
+      };
+    });
+    Route.updateLoader({
+      loader: async () => {
+        return ((await localDB.getItem("statuses")) as CardRootProps[]) || [];
+      },
+    });
+    localDB.setItem("statuses", res);
   };
   return (
     <div>
