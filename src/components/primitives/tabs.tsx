@@ -58,7 +58,15 @@ const TabsRoot = ({
     </TabsContext>
   );
 };
-const TabsContent = ({ children }: PropsWithChildren) => {
+const TabsContent = ({
+  children,
+  name,
+}: PropsWithChildren & {
+  name: string;
+}) => {
+  const { activeTab } = useTabsContext();
+  const isSelected = activeTab === name;
+  if (!isSelected) return null;
   return (
     <div className="w-full rounded-xl rounded-tr-none bg-white h-[200px]">
       {children}

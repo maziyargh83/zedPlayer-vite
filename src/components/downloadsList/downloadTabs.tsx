@@ -69,9 +69,9 @@ export const DownloadTabs = ({ tabs }: { tabs: TabsItemProps[] }) => {
             ))}
           </Reorder.Group>
         </Tabs.List>
-        <Tabs.Content></Tabs.Content>
-        <Tabs.Content></Tabs.Content>
-        <Tabs.Content></Tabs.Content>
+        <Tabs.Content name="Downloads"></Tabs.Content>
+        <Tabs.Content name="Finished"></Tabs.Content>
+        <Tabs.Content name="Pending"></Tabs.Content>
       </Tabs.Root>
     </div>
   );
