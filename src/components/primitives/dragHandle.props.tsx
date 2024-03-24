@@ -9,3 +9,7 @@ export type DragHandleProps = { controls: DragControls };
 export type isHover = {
   isHover: boolean;
 };
+
+export type DragTriggerProps = {
+  element: JSX.Element;
+};

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.7",
   "folders": [],
   "statuses": [
     {
@@ -27,6 +27,29 @@
 
       "theme": "bg-yellow-100",
       "className": "flex-1"
+    }
+  ],
+  "downloadTabs": [
+    {
+      "id": "10a6c054-0d5b-4765-a2ff-20ccd0a3c34c",
+      "name": "Downloads",
+      "icon": "FiDownloadCloud",
+      "iconName": "FiDownloadCloud",
+      "theme": "bg-teal-100"
+    },
+    {
+      "id": "fdd3f0af-ec59-4ecb-98e5-b2f52bf1c13d",
+      "name": "Finished",
+      "icon": "FiFile",
+      "iconName": "FiFile",
+      "theme": "bg-blue-100"
+    },
+    {
+      "id": "ba64d591-f0d5-483b-9db4-a0c67fde3816",
+      "name": "Pending",
+      "icon": "FiClock",
+      "iconName": "FiClock",
+      "theme": "bg-yellow-100"
     }
   ]
 }

@@ -28,6 +28,7 @@ export const DownloadStatus = ({
     });
     updateStatuses(newStatuses);
   };
+
   return (
     <Fragment>
       <Reorder.Group
@@ -52,7 +53,7 @@ export const DownloadStatus = ({
                     icon={<IconDisplay icon={status.iconName} />}
                     onChange={updateSingleStatus}
                   >
-                    <Card.Header>
+                    <Drag.Trigger element={<Card.Header />}>
                       {({ isHover }) => (
                         <Fragment>
                           <Card.Title />
@@ -66,7 +67,7 @@ export const DownloadStatus = ({
                           </AnimatePresence>
                         </Fragment>
                       )}
-                    </Card.Header>
+                    </Drag.Trigger>
                     <Card.Body className="py-3">
                       <Card.Footer />
                     </Card.Body>

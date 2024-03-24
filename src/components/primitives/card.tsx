@@ -1,14 +1,10 @@
 import { Menu } from "@/components/header/menu";
-import {
-  CardHeaderFnProps,
-  CardHeaderProps,
-  CardRootProps,
-} from "@/components/primitives/card.props";
+import { CardRootProps } from "@/components/primitives/card.props";
 import { IconPicker } from "@/components/primitives/iconPicker";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PropsWithClassName } from "@/types/global";
-import { Fragment, PropsWithChildren, useMemo, useState } from "react";
+import { Fragment, PropsWithChildren, useState } from "react";
 import { FaCircleQuestion } from "react-icons/fa6";
 import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
@@ -31,9 +27,11 @@ const cardDefaultContext: CardContextType & onUpdate = {
   editable: true,
   iconName: "",
 };
+
 const [CardContext, useCardContext] = createControlledContext<
   CardContextType & onUpdate
 >(cardDefaultContext);
+
 const CardRoot = ({
   className,
   children,
@@ -57,9 +55,6 @@ const CardRoot = ({
     onChange: (data) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { isEdit, ...rest } = data;
-      console.log("====================================");
-      console.log({ rest });
-      console.log("====================================");
       onChange?.({ ...rest, id });
     },
   });
@@ -105,28 +100,13 @@ const CardFooter = () => {
   );
 };
 
-const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
+const CardHeder = ({ children, ...props }: PropsWithChildren) => {
   const { theme, icon, editable, isEdit, onUpdate } = useCardContext();
-  const [isHover, setIsHover] = useState(false);
-  const renderChildren = useMemo(() => {
-    if (typeof children === "function") return children({ isHover });
-    return children;
-  }, [children, isHover]);
-  let timer: ReturnType<typeof setTimeout>;
-  const countForHover = () => {
-    timer = setTimeout(() => {
-      setIsHover(true);
-    }, 1000);
-  };
-  const timeoutClear = () => {
-    clearTimeout(timer);
-    setIsHover(false);
-  };
+
   return (
     <div
       className="flex bg-white relative overflow-hidden select-none"
-      onMouseEnter={countForHover}
-      onMouseLeave={timeoutClear}
+      {...props}
     >
       <div
         className={cn(
@@ -149,7 +129,7 @@ const CardHeder = ({ children }: CardHeaderProps<CardHeaderFnProps>) => {
             </Button>
           )}
         </div>
-        {renderChildren}
+        {children}
       </div>
 
       <div
