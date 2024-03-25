@@ -4,9 +4,10 @@ import Tabs from "@/components/primitives/tabs";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import Drag from "@/components/primitives/dragHandle";
-import { AnimatePresence, Reorder } from "framer-motion";
+import { Reorder } from "framer-motion";
 import { Fragment, useState } from "react";
 import { TabsItemProps } from "@/components/primitives/tabs.props";
+import { createIcon } from "@/lib/loadIcons";
 export const DownloadTabs = ({ tabs }: { tabs: TabsItemProps[] }) => {
   const [statuses, updateStatuses] = useState<TabsItemProps[]>(tabs);
 
@@ -42,8 +43,10 @@ export const DownloadTabs = ({ tabs }: { tabs: TabsItemProps[] }) => {
                     <Drag.Trigger
                       element={
                         <Tabs.Item
-                          iconName={status.iconName}
-                          icon={<IconDisplay icon={status.iconName} />}
+                          icon={createIcon({
+                            element: <IconDisplay icon={status.icon!} />,
+                            name: status.icon?.name,
+                          })}
                           theme={status.theme}
                           title={status.name}
                           name={status.name}

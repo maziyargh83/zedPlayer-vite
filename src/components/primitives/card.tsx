@@ -1,9 +1,9 @@
 import { Menu } from "@/components/header/menu";
 import { CardRootProps } from "@/components/primitives/card.props";
-import { IconPicker } from "@/components/primitives/iconPicker";
+import { IconPickerModal } from "@/components/primitives/iconPicker";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { PropsWithClassName } from "@/types/global";
+import { IconProps, PropsWithClassName } from "@/types/global";
 import { Fragment, PropsWithChildren, useState } from "react";
 import { FaCircleQuestion } from "react-icons/fa6";
 import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
@@ -15,8 +15,7 @@ interface CardContextType {
   isEdit: boolean;
   title: string;
   theme: string;
-  icon?: React.ReactNode;
-  iconName: string;
+  icon?: IconProps["icon"];
   editable?: boolean;
 }
 type onUpdate = { onUpdate?: (d: Partial<CardContextType>) => void };
@@ -25,7 +24,6 @@ const cardDefaultContext: CardContextType & onUpdate = {
   title: "",
   theme: "bg-gray-100",
   editable: true,
-  iconName: "",
 };
 
 const [CardContext, useCardContext] = createControlledContext<
@@ -40,7 +38,6 @@ const CardRoot = ({
   icon,
   editable = true,
   onChange,
-  iconName,
   id,
 }: PropsWithChildren<CardRootProps>) => {
   const [props, setProps] = useControllableState<CardContextType>({
@@ -49,7 +46,6 @@ const CardRoot = ({
       theme,
       editable,
       icon,
-      iconName,
       isEdit: false,
     },
     onChange: (data) => {
@@ -116,16 +112,17 @@ const CardHeder = ({ children, ...props }: PropsWithChildren) => {
       >
         <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
           {editable ? (
-            <IconPicker
-              onSelect={({ iconName, icon }) => onUpdate?.({ icon, iconName })}
+            <IconPickerModal
+              onSelect={({ icon }) => onUpdate?.({ icon })}
+              icon={icon!}
             >
-              <Button variant={"ghost"} className="p-2 h-4">
-                {icon}
+              <Button variant={"ghost"} className="p-4 h-4">
+                {icon?.element}
               </Button>
-            </IconPicker>
+            </IconPickerModal>
           ) : (
-            <Button variant={"ghost"} className="p-2 h-4">
-              {icon}
+            <Button variant={"ghost"} className="p-4 h-4">
+              {icon?.element}
             </Button>
           )}
         </div>

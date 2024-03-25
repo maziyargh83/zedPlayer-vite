@@ -1,4 +1,4 @@
-import { PropsWithClassName } from "@/types/global";
+import { IconProps, PropsWithClassName } from "@/types/global";
 
 export interface TabsProps {
   className?: string;
@@ -13,9 +13,8 @@ export type TabsRootProps = Pick<TabsProps, "editable" | "activeTab"> &
 export interface TabsItemProps {
   className?: string;
   title: string;
-  icon?: React.ReactNode;
+  icon?: IconProps["icon"];
   theme?: string;
-  iconName: string;
   name: string;
   id: string;
 }

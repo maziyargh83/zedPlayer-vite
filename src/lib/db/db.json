@@ -1,20 +1,22 @@
 {
-  "version": "1.0.7",
+  "version": "1.0.8",
   "folders": [],
   "statuses": [
     {
       "id": "929967d1-5da5-4981-91bb-92124896b75d",
       "title": "Downloads",
-      "icon": "FiDownloadCloud",
-      "iconName": "FiDownloadCloud",
+      "icon": {
+        "name": "FiDownloadCloud"
+      },
       "theme": "bg-teal-100",
       "className": "flex-1"
     },
     {
       "id": "9118dd17-64a2-4530-bda5-3f66291259fd",
       "title": "Finished",
-      "icon": "FiFile",
-      "iconName": "FiFile",
+      "icon": {
+        "name": "FiFile"
+      },
 
       "theme": "bg-blue-100",
       "className": "flex-1"
@@ -22,8 +24,9 @@
     {
       "id": "d7a65b04-4d47-4873-8a47-431aa7ee6eee",
       "title": "Pending",
-      "icon": "FiClock",
-      "iconName": "FiClock",
+      "icon": {
+        "name": "FiClock"
+      },
 
       "theme": "bg-yellow-100",
       "className": "flex-1"
@@ -33,22 +36,25 @@
     {
       "id": "10a6c054-0d5b-4765-a2ff-20ccd0a3c34c",
       "name": "Downloads",
-      "icon": "FiDownloadCloud",
-      "iconName": "FiDownloadCloud",
+      "icon": {
+        "name": "FiDownloadCloud"
+      },
       "theme": "bg-teal-100"
     },
     {
       "id": "fdd3f0af-ec59-4ecb-98e5-b2f52bf1c13d",
       "name": "Finished",
-      "icon": "FiFile",
-      "iconName": "FiFile",
+      "icon": {
+        "name": "FiFile"
+      },
       "theme": "bg-blue-100"
     },
     {
       "id": "ba64d591-f0d5-483b-9db4-a0c67fde3816",
       "name": "Pending",
-      "icon": "FiClock",
-      "iconName": "FiClock",
+      "icon": {
+        "name": "FiClock"
+      },
       "theme": "bg-yellow-100"
     }
   ]

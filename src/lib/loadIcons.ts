@@ -1,4 +1,5 @@
-import { FunctionComponent, ReactNode } from "react";
+import { IconProps } from "@/types/global";
+import { FunctionComponent } from "react";
 import { IconsManifest } from "react-icons";
 export async function loadIconFiles(selectedTab: string) {
   switch (selectedTab) {
@@ -82,4 +83,15 @@ export const LoadIconBuyName = async (
   const icons = (await loadIconFiles(matches[0])) as unknown as iconLoader;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (icons as unknown as any)?.[name]?.() as JSX.Element;
+};
+export const createIcon = ({
+  element,
+  name,
+  setting,
+}: Partial<IconProps["icon"]>): IconProps["icon"] => {
+  return {
+    element,
+    name: name!,
+    setting: setting || {},
+  };
 };

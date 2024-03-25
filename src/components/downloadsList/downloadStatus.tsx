@@ -4,6 +4,7 @@ import { AnimatePresence, Reorder } from "framer-motion";
 import { Fragment, useState } from "react";
 import Drag from "@/components/primitives/dragHandle";
 import { IconDisplay } from "@/components/primitives/iconLoader";
+import { createIcon } from "@/lib/loadIcons";
 export const DownloadStatus = ({
   status,
   onUpdateStatus,
@@ -50,7 +51,10 @@ export const DownloadStatus = ({
                 >
                   <Card.Root
                     {...status}
-                    icon={<IconDisplay icon={status.iconName} />}
+                    icon={createIcon({
+                      element: <IconDisplay icon={status.icon!} />,
+                      name: status.icon?.name,
+                    })}
                     onChange={updateSingleStatus}
                   >
                     <Drag.Trigger element={<Card.Header />}>

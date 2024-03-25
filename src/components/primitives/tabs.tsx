@@ -1,5 +1,5 @@
 import { createControlledContext } from "@/components/context/createControlledContext";
-import { IconPicker } from "@/components/primitives/iconPicker";
+import { IconPickerModal } from "@/components/primitives/iconPicker";
 import {
   TabsItemProps,
   TabsRootProps,
@@ -115,8 +115,6 @@ const TabItem = ({
   theme,
   name,
   children,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  iconName,
   ...props
 }: PropsWithChildren<TabsItemProps>) => {
   const { activeTab, onUpdate } = useTabsContext();
@@ -142,13 +140,14 @@ const TabItem = ({
           }
         )}
       >
-        <IconPicker
-        // onSelect={({ iconName, icon }) => onUpdate?.({ icon, iconName })}
+        <IconPickerModal
+          icon={icon!}
+          onSelect={({ icon }) => console.log(icon)}
         >
           <Button variant={"ghost"} className="p-4 h-4">
-            {icon}
+            {icon?.element}
           </Button>
-        </IconPicker>
+        </IconPickerModal>
         <p className={cn("text-base mx-3 font-bold")}>{title}</p>
         {children}
       </div>

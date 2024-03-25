@@ -7,7 +7,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/download/")({
   component: Download,
-  loader: async ({ context }) => {
+  loader: async () => {
     const status =
       ((await localDB.getItem("statuses")) as CardRootProps[]) || [];
     const tabs =
@@ -25,7 +25,10 @@ function Download() {
     const res = _status.map((item) => {
       return {
         ...item,
-        icon: item.iconName,
+        icon: {
+          ...item.icon,
+          element: undefined,
+        },
       };
     });
 
