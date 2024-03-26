@@ -142,12 +142,32 @@ const IconPicker = ({ onSelect }: onSelect) => {
   );
 };
 const IconConfig = ({ icon }: IconProps) => {
+  const [color, setColor] = useState(icon.setting?.color || "#000");
+
+  const setting = { ...icon.setting, color };
   return (
-    <div className="h-80  overflow-y-auto ">
-      <div className="w-full justify-center items-center flex">
-        <IconDisplay icon={icon} />
+    <div className="h-80  overflow-y-auto flex flex-col">
+      <div className="w-full justify-center items-center flex border-b pb-3 mb-3">
+        <IconDisplay
+          icon={{
+            ...icon,
+            // element: undefined,
+            setting,
+          }}
+        />
       </div>
-      <ColorPicker />
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-sm my-2">Color :</p>
+          <ColorPicker currentColor={color} onSelectColor={setColor} />
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-sm my-2">Size :</p>
+          <ColorPicker currentColor={icon.setting?.color} />
+        </div>
+      </div>
+      <div className="flex-1" />
+      <Button>Save</Button>
     </div>
   );
 };

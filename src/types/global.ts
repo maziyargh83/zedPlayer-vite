@@ -1,5 +1,4 @@
 import { FunctionComponent } from "react";
-import { IconBaseProps } from "react-icons";
 
 export type PropsWithClassName = {
   className?: string;
@@ -10,6 +9,9 @@ export interface IconProps {
   icon: {
     element?: JSX.Element;
     name: string;
-    setting?: IconBaseProps;
+    setting?: {
+      size?: number;
+      color?: string;
+    };
   };
 }

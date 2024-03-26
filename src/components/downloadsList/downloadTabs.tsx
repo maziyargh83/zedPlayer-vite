@@ -17,7 +17,7 @@ export const DownloadTabs = ({ tabs }: { tabs: TabsItemProps[] }) => {
         <Tabs.List
           lastItem={
             <DownloadModal>
-              <Button className="space-x-2" variant={"ghost"}>
+              <Button className="space-x-2" variant={"link"}>
                 Add url
                 <FiPlus />
               </Button>

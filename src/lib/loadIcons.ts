@@ -73,16 +73,19 @@ const ids = IconsManifest.map((icon) => icon.id);
 type iconLoader = Record<string, FunctionComponent>;
 export const LoadIconBuyName = async (
   name: string,
+  setting: IconProps["icon"]["setting"],
   long = 2
 ): Promise<JSX.Element> => {
   const prefix = name.slice(0, long)?.toLocaleLowerCase();
   const matches = ids.filter((id) => id.startsWith(prefix));
   if (matches.length > 1) {
-    return LoadIconBuyName(name, 3);
+    return LoadIconBuyName(name, undefined, 3);
   }
   const icons = (await loadIconFiles(matches[0])) as unknown as iconLoader;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (icons as unknown as any)?.[name]?.() as JSX.Element;
+  return (icons as unknown as any)?.[name]?.({
+    color: setting?.color,
+  }) as JSX.Element;
 };
 export const createIcon = ({
   element,

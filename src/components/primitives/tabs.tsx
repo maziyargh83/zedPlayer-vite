@@ -135,7 +135,7 @@ const TabItem = ({
           "py-2 px-2 rounded-xl flex items-center select-none relative",
           className,
           {
-            "rounded-sm bg-opacity-70": !isSelected,
+            "bg-opacity-70  hover:bg-white/40": !isSelected,
             "bg-white": isSelected,
           }
         )}

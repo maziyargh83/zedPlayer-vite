@@ -1,8 +1,7 @@
 import Animation from "@/components/primitives/animation";
 import { LoadIconBuyName } from "@/lib/loadIcons";
 import { IconProps } from "@/types/global";
-import { ReactNode, useEffect, useState } from "react";
-
+import { cloneElement, ReactNode, useEffect, useState } from "react";
 export function IconDisplay({
   icon,
   showLoading = true,
@@ -14,9 +13,16 @@ export function IconDisplay({
 
   // Function to load the icon
   const loadIcon = async () => {
-    if (icon.element) return;
+    if (icon.element && icon.element.type.name != "IconDisplay") {
+      const element = cloneElement(icon.element, {
+        ...icon.setting,
+      });
+      setIconComponent(element);
+      setIsLoading(false);
+      return;
+    }
     try {
-      const _iconComponent = await LoadIconBuyName(icon.name);
+      const _iconComponent = await LoadIconBuyName(icon.name, icon.setting);
       setIconComponent(_iconComponent);
       setIsLoading(false);
     } catch (error) {
@@ -32,7 +38,7 @@ export function IconDisplay({
   }, [icon]);
 
   if (isLoading) {
-    if (showLoading) return <Animation.Skeleton />;
+    if (showLoading) return <Animation.Skeleton height={16} width={16} />;
     return icon.name;
   }
 
