@@ -16,9 +16,9 @@ export type CardRootProps = Pick<
   CardProps,
   "theme" | "title" | "icon" | "editable" | "id"
 > &
-  PropsWithClassName & {
+  PropsWithClassName<{
     onChange?: (data: Partial<CardProps>) => void;
-  };
+  }>;
 export type CardHeaderTitleProps = Omit<CardProps, "icon"> &
   Pick<CardProps, "title"> & {
     isEdit: boolean;

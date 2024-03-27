@@ -7,6 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useControllableState } from "@/hooks/useControllableState";
 import { cn } from "@/lib/utils";
+import { PropsWithClassName } from "@/types/global";
 import { PropsWithChildren, useEffect } from "react";
 
 interface TabsContextType {
@@ -61,14 +62,16 @@ const TabsRoot = ({
 const TabsContent = ({
   children,
   name,
-}: PropsWithChildren & {
-  name: string;
-}) => {
+}: PropsWithChildren<
+  PropsWithClassName<{
+    name: string;
+  }>
+>) => {
   const { activeTab } = useTabsContext();
   const isSelected = activeTab === name;
   if (!isSelected) return null;
   return (
-    <div className="w-full rounded-xl rounded-tr-none bg-white h-[200px]">
+    <div className="w-full rounded-xl rounded-tr-none bg-white min-h-[200px p-2">
       {children}
     </div>
   );

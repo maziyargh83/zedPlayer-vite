@@ -1263,6 +1263,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-checkbox@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@radix-ui/react-checkbox@npm:1.0.4"
+  dependencies:
+    "@babel/runtime": "npm:^7.13.10"
+    "@radix-ui/primitive": "npm:1.0.1"
+    "@radix-ui/react-compose-refs": "npm:1.0.1"
+    "@radix-ui/react-context": "npm:1.0.1"
+    "@radix-ui/react-presence": "npm:1.0.1"
+    "@radix-ui/react-primitive": "npm:1.0.3"
+    "@radix-ui/react-use-controllable-state": "npm:1.0.1"
+    "@radix-ui/react-use-previous": "npm:1.0.1"
+    "@radix-ui/react-use-size": "npm:1.0.1"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: a4bd259a7e15ad88f72524190ddcc2db0688d439aad954e06d0adf6038b2e17397ed8ae0ea26ab09bf6981f1b9dd883904b2b7e74b307b5c6b1a3765d27fe737
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-collection@npm:1.0.3":
   version: 1.0.3
   resolution: "@radix-ui/react-collection@npm:1.0.3"
@@ -1298,6 +1325,31 @@ __metadata:
     "@types/react":
       optional: true
   checksum: be06f8dab35b5a1bffa7a5982fb26218ddade1acb751288333e3b89d7b4a7dfb5a6371be83876dac0ec2ebe0866d295e8618b778608e1965342986ea448040ec
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-context-menu@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "@radix-ui/react-context-menu@npm:2.1.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.13.10"
+    "@radix-ui/primitive": "npm:1.0.1"
+    "@radix-ui/react-context": "npm:1.0.1"
+    "@radix-ui/react-menu": "npm:2.0.6"
+    "@radix-ui/react-primitive": "npm:1.0.3"
+    "@radix-ui/react-use-callback-ref": "npm:1.0.1"
+    "@radix-ui/react-use-controllable-state": "npm:1.0.1"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 00b8b377f9c710ea83cc6e9bbc9a6a8614bde9df120ed6eba5dd766d1a3f4068b739a364913e8bc288ff765e0e351edf2a975854d4f0d1c9277fb5b0978a8c76
   languageName: node
   linkType: hard
 
@@ -1789,6 +1841,21 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 13cd0c38395c5838bc9a18238020d3bcf67fb340039e6d1cbf438be1b91d64cf6900b78121f3dc9219faeb40dcc7b523ce0f17e4a41631655690e5a30a40886a
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-previous@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-previous@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.13.10"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: f5fbc602108668484a4ed506b7842482222d1d03094362e26abb7fdd593eee8794fc47d85b3524fb9d00884801c89a6eefd0bed0971eba1ec189c637b6afd398
   languageName: node
   linkType: hard
 
@@ -2688,6 +2755,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-table@npm:^8.15.0":
+  version: 8.15.0
+  resolution: "@tanstack/react-table@npm:8.15.0"
+  dependencies:
+    "@tanstack/table-core": "npm:8.14.0"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: fa82e413d66127090b33ff4a8e13cbad275bc3c3295c37031a7cccd5fa881ee36fa627c2b7a65300cb0c0e889fca6055939802776f2df8a997533d71686fde98
+  languageName: node
+  linkType: hard
+
 "@tanstack/router-devtools@npm:^1.22.3":
   version: 1.22.3
   resolution: "@tanstack/router-devtools@npm:1.22.3"
@@ -2726,6 +2805,13 @@ __metadata:
   version: 0.1.3
   resolution: "@tanstack/store@npm:0.1.3"
   checksum: e56b2576cd963a7c4ca945fb16f2adf6692143aff1fb62c7a6739c7c004c3e3848d66d6838109f56236ee8988c69d3c807389db39011c59a53abc761df1b9ac0
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.14.0":
+  version: 8.14.0
+  resolution: "@tanstack/table-core@npm:8.14.0"
+  checksum: 1ace39fd500c32f110512c4ba519d7c0e3c57d3b4f353e114d1ec12d069265678fb37b9063cfcfe1cb1fb35f57959a6e2536914093b0b33d3aef9861be32b117
   languageName: node
   linkType: hard
 
@@ -4556,6 +4642,21 @@ __metadata:
   bin:
     jiti: bin/jiti.js
   checksum: 7f361219fe6c7a5e440d5f1dba4ab763a5538d2df8708cdc22561cf25ea3e44b837687931fca7cdd8cdd9f567300e90be989dd1321650045012d8f9ed6aab07f
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "jotai@npm:2.7.1"
+  peerDependencies:
+    "@types/react": ">=17.0.0"
+    react: ">=17.0.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 7146023b77e32257e120e3a9f3f29ab3972f6ee2146e3c843cc43dc75aaa200c8e3d2513bb6a358755057a23ba716d6b74d56dbcd9d97416d8adf3d50545b096
   languageName: node
   linkType: hard
 
@@ -6482,6 +6583,8 @@ __metadata:
     "@aws-sdk/client-s3": "npm:^3.540.0"
     "@naria2/node": "npm:^0.0.25"
     "@radix-ui/react-avatar": "npm:^1.0.4"
+    "@radix-ui/react-checkbox": "npm:^1.0.4"
+    "@radix-ui/react-context-menu": "npm:^2.1.5"
     "@radix-ui/react-dialog": "npm:^1.0.5"
     "@radix-ui/react-dropdown-menu": "npm:^2.0.6"
     "@radix-ui/react-popover": "npm:^1.0.7"
@@ -6489,6 +6592,7 @@ __metadata:
     "@radix-ui/react-tabs": "npm:^1.0.4"
     "@radix-ui/react-tooltip": "npm:^1.0.7"
     "@tanstack/react-router": "npm:^1.22.3"
+    "@tanstack/react-table": "npm:^8.15.0"
     "@tanstack/router-devtools": "npm:^1.22.3"
     "@tanstack/router-vite-plugin": "npm:^1.20.5"
     "@types/events": "npm:^3"
@@ -6510,6 +6614,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.6"
     events: "npm:^3.3.0"
     framer-motion: "npm:^11.0.20"
+    jotai: "npm:^2.7.1"
     libaria2: "npm:^1.0.95"
     libaria2-ts: "npm:1.0.91"
     localforage: "npm:^1.10.0"

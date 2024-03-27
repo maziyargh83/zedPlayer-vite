@@ -12,7 +12,7 @@ import { PropsWithClassName } from "@/types/global";
 const DragHandle = ({
   controls,
   top = 0,
-}: DragHandleProps & isHover & PropsWithClassName & { top?: number }) => {
+}: PropsWithClassName<DragHandleProps & isHover & { top?: number }>) => {
   return (
     <motion.div
       className="absolute left-[50%] -translate-x-[50%] w-16 h-16 flex items-start justify-center"

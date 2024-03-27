@@ -30,10 +30,11 @@ export const ColorPicker = ({
   className,
   currentColor = "#000",
   onSelectColor = () => {},
-}: PropsWithClassName &
+}: PropsWithClassName<
   onSelectColor & {
     currentColor?: string;
-  }) => {
+  }
+>) => {
   return (
     <ColorProvider onSelectColor={onSelectColor}>
       <ColorPalettePopOver>

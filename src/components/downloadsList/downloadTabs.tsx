@@ -8,6 +8,7 @@ import { Reorder } from "framer-motion";
 import { Fragment, useState } from "react";
 import { TabsItemProps } from "@/components/primitives/tabs.props";
 import { createIcon } from "@/lib/loadIcons";
+import { StoppedStatusList } from "@/components/downloadsList/status/stoppedStatusList";
 export const DownloadTabs = ({ tabs }: { tabs: TabsItemProps[] }) => {
   const [statuses, updateStatuses] = useState<TabsItemProps[]>(tabs);
 
@@ -73,7 +74,9 @@ export const DownloadTabs = ({ tabs }: { tabs: TabsItemProps[] }) => {
           </Reorder.Group>
         </Tabs.List>
         <Tabs.Content name="Downloads"></Tabs.Content>
-        <Tabs.Content name="Finished"></Tabs.Content>
+        <Tabs.Content name="Finished">
+          <StoppedStatusList />
+        </Tabs.Content>
         <Tabs.Content name="Pending"></Tabs.Content>
       </Tabs.Root>
     </div>

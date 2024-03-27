@@ -6,9 +6,9 @@ export interface TabsProps {
   activeTab?: string;
 }
 export type TabsRootProps = Pick<TabsProps, "editable" | "activeTab"> &
-  PropsWithClassName & {
+  PropsWithClassName<{
     onChange?: (data: Partial<TabsProps>) => void;
-  };
+  }>;
 
 export interface TabsItemProps {
   className?: string;

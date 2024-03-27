@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
 
-export type PropsWithClassName = {
-  className?: string;
+export type PropsWithClassName<P = unknown> = P & {
+  className?: string | undefined;
 };
+
 export type PropsWithFunctionalProps<T, E = unknown> = T | FunctionComponent<E>;
 
 export interface IconProps {
