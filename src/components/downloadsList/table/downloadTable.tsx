@@ -111,7 +111,13 @@ export const columns: ColumnDef<IAria2DownloadStatus>[] = [
   },
 ];
 
-export function DownloadTable({ data }: { data: IAria2DownloadStatus[] }) {
+export function DownloadTable({
+  data,
+  enableHeader = true,
+}: {
+  data: IAria2DownloadStatus[];
+  enableHeader?: boolean;
+}) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -138,54 +144,56 @@ export function DownloadTable({ data }: { data: IAria2DownloadStatus[] }) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <div>
+      {enableHeader && (
+        <div className="flex items-center py-4">
           <div>
-            <FiPlay />
+            <div>
+              <FiPlay />
+            </div>
+            <div>
+              <FiDelete
+                onClick={() => {
+                  aria2Client.remove(data[0].gid);
+                }}
+              />
+            </div>
           </div>
-          <div>
-            <FiDelete
-              onClick={() => {
-                aria2Client.remove(data[0].gid);
-              }}
-            />
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div className="rounded-md border">
-        <Table>
+      )}
+      <div className="rounded-md ">
+        <Table className="border-none">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className="border-none" key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -198,22 +206,23 @@ export function DownloadTable({ data }: { data: IAria2DownloadStatus[] }) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="border-none">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="border-none"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      <DownloadTableContextMenu>
+                    <DownloadTableContextMenu>
+                      <TableCell key={cell.id}>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
                         )}
-                      </DownloadTableContextMenu>
-                    </TableCell>
+                      </TableCell>
+                    </DownloadTableContextMenu>
                   ))}
                 </TableRow>
               ))

@@ -9,7 +9,7 @@ import { PropsWithChildren } from "react";
 export const DownloadTableContextMenu = ({ children }: PropsWithChildren) => {
   return (
     <ContextMenu>
-      <ContextMenuTrigger>{children}</ContextMenuTrigger>
+      <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem>Profile</ContextMenuItem>
         <ContextMenuItem>Billing</ContextMenuItem>

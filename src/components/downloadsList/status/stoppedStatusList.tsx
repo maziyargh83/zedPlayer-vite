@@ -5,5 +5,5 @@ import { useStoppedStatus } from "@/hooks/api/useListStatus";
 export const StoppedStatusList = () => {
   const { data, isLoading } = useStoppedStatus();
   if (!data || isLoading) return <Animation.Spinner />;
-  return <DownloadTable data={data} />;
+  return <DownloadTable data={data} enableHeader={false} />;
 };
