@@ -1131,7 +1131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@naria2/options@npm:0.0.25":
+"@naria2/options@npm:0.0.25, @naria2/options@npm:^0.0.25":
   version: 0.0.25
   resolution: "@naria2/options@npm:0.0.25"
   dependencies:
@@ -6677,6 +6677,7 @@ __metadata:
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.540.0"
     "@naria2/node": "npm:^0.0.25"
+    "@naria2/options": "npm:^0.0.25"
     "@radix-ui/react-avatar": "npm:^1.0.4"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
     "@radix-ui/react-context-menu": "npm:^2.1.5"

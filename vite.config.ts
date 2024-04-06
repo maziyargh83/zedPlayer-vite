@@ -12,15 +12,15 @@ export default defineConfig({
     react(),
     TanStackRouterVite(),
     TopLevelAwait(), // Used for transforming the top-level await syntax
-    Naria2({
-      childProcess: {
-        log: "./aria2.log", // Used for debug
-        environment: "ignore", // Ignore proxy environment variables
-        rpc: {
-          secret: "123456", // Use the fixed secret, or generate under the hood
-        },
-      },
-    }),
+    // Naria2({
+    //   childProcess: {
+    //     log: "./aria2.log", // Used for debug
+    //     environment: "ignore", // Ignore proxy environment variables
+    //     rpc: {
+    //       secret: "123456", // Use the fixed secret, or generate under the hood
+    //     },
+    //   },
+    // }),
   ],
   resolve: {
     alias: {

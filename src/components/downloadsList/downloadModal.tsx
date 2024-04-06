@@ -33,6 +33,8 @@ export const DownloadModalContent = () => {
   const [advance, setAdvance] = useState<boolean>(false);
   const onAdduri = async () => {
     const links = urls?.split("\n") || [];
+    console.log(aria2Client);
+
     const res = await aria2Client.addUri(links, {
       dir: ".aria2/image/",
     });

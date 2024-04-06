@@ -47,13 +47,15 @@ export namespace RpcWebSocket {
     protected _open_cbs: Array<() => void> = [];
     /** @ignore  @internal */
     protected _opened = false;
-
+    private reconnectAttempts = 0;
     constructor(
       options: Readonly<IAria2ClientOptions & IAria2WSClientOptions>
     ) {
       super();
       this._options = Object.assign({}, options);
-
+      this._connect(options);
+    }
+    private _connect(options: IAria2ClientOptions & IAria2WSClientOptions) {
       this._conn = new WebSocket(
         `${options.protocol ?? "ws"}://${options.host}:${options.port}${
           options.path ?? "/jsonrpc"
@@ -70,11 +72,19 @@ export namespace RpcWebSocket {
       this._conn.onclose = () => {
         this.emit("ws.close");
         this._opened = false;
-        this._open_cbs = [];
+        if (this.reconnectAttempts < 5) {
+          this.reconnectAttempts++;
+          setTimeout(() => {
+            this._connect(options);
+          }, 5000);
+        } else {
+          this._open_cbs = [];
+        }
       };
       this._conn.onopen = () => {
         this.emit("ws.open");
         this._opened = true;
+        this.reconnectAttempts = 0;
         while (this._open_cbs.length > 0) {
           let cb = this._open_cbs.pop();
           if (cb != undefined && this._conn.readyState == 1) {
@@ -82,6 +92,7 @@ export namespace RpcWebSocket {
           }
         }
       };
+
       this._conn.onmessage = (event) => {
         // Fix type issue
         const data = event?.type == "message" || isNode() ? event.data : event;
@@ -153,7 +164,9 @@ export namespace RpcWebSocket {
         }
       };
     }
-
+    public retry() {
+      this._connect(this._options);
+    }
     /** @ignore  @internal */
     protected $errorHandle<T>(e: T) {}
 
